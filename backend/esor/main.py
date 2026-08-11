@@ -8,12 +8,21 @@ def main():
     print("              ESOR")
     print("       Local AI Assistant")
     print("=" * 40)
+    print("Escribe 'salir' para terminar.\n")
 
-    message = input("\nTú: ")
+    while True:
+        message = input("Tú: ").strip()
 
-    response = ai.generate(message)
+        if not message:
+            continue
 
-    print(f"\nESOR: {response}")
+        if message.lower() in {"salir", "exit", "quit"}:
+            print("\nESOR: Hasta luego, Emerson.")
+            break
+
+        response = ai.generate(message)
+
+        print(f"\nESOR: {response}\n")
 
 
 if __name__ == "__main__":
