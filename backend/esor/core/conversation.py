@@ -1,0 +1,30 @@
+from esor.core.config import SYSTEM_PROMPT
+
+
+class ConversationManager:
+    def __init__(self):
+        self.messages = [
+            {
+                "role": "system",
+                "content": SYSTEM_PROMPT,
+            }
+        ]
+
+    def add_user_message(self, message: str) -> None:
+        self.messages.append(
+            {
+                "role": "user",
+                "content": message,
+            }
+        )
+
+    def add_assistant_message(self, message: str) -> None:
+        self.messages.append(
+            {
+                "role": "assistant",
+                "content": message,
+            }
+        )
+
+    def get_messages(self) -> list[dict[str, str]]:
+        return self.messages

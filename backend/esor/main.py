@@ -1,8 +1,11 @@
+from esor.core.config import MODEL_NAME
+from esor.core.conversation import ConversationManager
 from esor.core.provider import OllamaProvider
 
 
 def main():
-    ai = OllamaProvider()
+    conversation = ConversationManager()
+    ai = OllamaProvider(model=MODEL_NAME)
 
     print("=" * 40)
     print("              ESOR")
@@ -20,7 +23,13 @@ def main():
             print("\nESOR: Hasta luego, Emerson.")
             break
 
-        response = ai.generate(message)
+        conversation.add_user_message(message)
+
+        response = ai.generate(
+            conversation.get_messages()
+        )
+
+        conversation.add_assistant_message(response)
 
         print(f"\nESOR: {response}\n")
 
