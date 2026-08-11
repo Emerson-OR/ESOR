@@ -1,8 +1,10 @@
 import ollama
 
+from esor.core.config import MODEL_NAME, SYSTEM_PROMPT
+
 
 class OllamaProvider:
-    def __init__(self, model: str = "qwen3:4b"):
+    def __init__(self, model: str = MODEL_NAME):
         self.model = model
 
     def generate(self, message: str) -> str:
@@ -10,9 +12,13 @@ class OllamaProvider:
             model=self.model,
             messages=[
                 {
+                    "role": "system",
+                    "content": SYSTEM_PROMPT,
+                },
+                {
                     "role": "user",
                     "content": message,
-                }
+                },
             ],
         )
 
